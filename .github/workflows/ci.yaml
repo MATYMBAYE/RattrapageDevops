@@ -6,9 +6,9 @@ on:
       - main
 
 env:
-  IMAGE_NAME: webapp-ci-cd
-  IMAGE_TAG: 1.0.1
-  DOCKER_REGISTRY: ${{ secrets.DOCKERHUB_USERNAME }}
+  IMAGE_NAME: TO_BE_REPLACE
+  IMAGE_TAG: TO_BE_REPLACE
+  DOCKER_REGISTRY: TO_BE_REPLACE
 
 jobs:
 
@@ -30,20 +30,20 @@ jobs:
 
       - name: Login to Docker Hub
         run: |
-          echo "${{ secrets.DOCKERHUB_TOKEN }}" | \
-          docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+          echo "TO_BE_REPLACE" | \
+          docker login -u "TO_BE_REPLACE" --password-stdin
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
+          docker build -t TO_BE_REPLACE/TO_BE_REPLACE:TO_BE_REPLACE .
 
       - name: Verify image
         run: |
-          docker image ls | grep ${{ env.IMAGE_NAME }}
+          docker image ls | grep TO_BE_REPLACE
 
       - name: Push Docker image
         run: |
-          docker push ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          docker push TO_BE_REPLACE/TO_BE_REPLACE:TO_BE_REPLACE
 
   # ===============================
   # JOB 2 - CD : DEPLOY
@@ -59,7 +59,7 @@ jobs:
 
       - name: Pull latest image
         run: |
-          docker pull ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          docker pull TO_BE_REPLACE/TO_BE_REPLACE:TO_BE_REPLACE
 
       - name: Stop existing container
         run: |
@@ -74,4 +74,4 @@ jobs:
           docker run -d \
             -p 80:80 \
             --name ci-app \
-            ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+            TO_BE_REPLACE/TO_BE_REPLACE:TO_BE_REPLACE
